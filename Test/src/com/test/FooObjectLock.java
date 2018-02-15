@@ -19,6 +19,10 @@ public class FooObjectLock implements Runnable {
 	public void Lock() throws InterruptedException {
 		System.out.println(Thread.currentThread().getName());
 		synchronized (this) {
+			if(Thread.currentThread().getName().equals("t1")){
+				System.out.println("t1 locked for 5000 ms");
+				Thread.sleep(5000);	
+			}
 			System.out.println("in block " + Thread.currentThread().getName());
 			System.out.println("in block " + Thread.currentThread().getName() + " end");
 		}

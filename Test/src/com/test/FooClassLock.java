@@ -3,18 +3,28 @@ package com.test;
 public class FooClassLock implements Runnable {
 	@Override
 	public void run() {
-		Lock();
-		m1();
+		
+		try {
+			Lock();
+			m1();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void m1() {
 		System.out.println("m1 executed by "+Thread.currentThread().getName());
 	}
 	
-	public void Lock() {
+	public void Lock() throws InterruptedException{
 		System.out.println(Thread.currentThread().getName());
 		synchronized (FooClassLock.class) {
+			if(Thread.currentThread().getName().equals("t1")){
+				System.out.println("t1 locked for 5000 ms");
+				Thread.sleep(5000);
+			}
 			System.out.println("in block " + Thread.currentThread().getName());
+//			Thread.sleep(5000);
 			System.out.println("in block " + Thread.currentThread().getName() + " end");
 		}
 	}
