@@ -28,6 +28,7 @@ public class FooObjectLock implements Runnable {
 		}
 	}
 
+
 	public static void main(String[] args) {
 		FooObjectLock b1 = new FooObjectLock();
 		Thread t1 = new Thread(b1);
